@@ -11,12 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnBookSearch = document.getElementById("btn-book-search");
     btnBookSearch.addEventListener("click", function () {
         const searchString = document.getElementById("search-string").value;
-        console.log(seaerchString);
+        
+        searchableContents.forEach(  function(item) {
+            console.log(item);
+        //    if(item.indexOf(searchString) > 0)
+        //    show("card", searchableContents[])
+        });
     });
     main();
 
 
-    /*<div class="card" style="width: 18rem;">
+    /*<div class="card" style="width: 18rem
           <div class="card" style="width: 18rem;">
             <div class="flip-card">
               <div class="flip-card-inner">
@@ -83,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const moreInfo = elem.detallee;
         const title = elem.titolo;
 
-        //let searchableContents[elem.titolo] = elem.detailee;
+        let searchableContents[elem.desciption] = elem;
         console.log(elem)
 
         placeCard(location);
