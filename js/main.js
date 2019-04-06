@@ -13,35 +13,18 @@ document.addEventListener('DOMContentLoaded', function () {
         function () {
             const searchString = document.getElementById("search-string").value;
         
+            console.log( searchableContents.Keys() );
             searchableContents.Keys.forEach(  function(item) {
-            if(item.indexOf(searchString) > 0)
-                Show("card", searchableContents[])
+                console.log(iem)
+            });
         });
-    });
     main();
 
 
-    /*<div class="card" style="width: 18rem
-          <div class="card" style="width: 18rem;">
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <img id="book-front-cover" src="...." alt="book front cover" style="width:300px;">
-                </div>
-                <div class="flip-card-back">
-                  <h1 id="book-autor-name"></h1> 
-                  <p></p>
-                </div>
-              </div>
-            </div>
-          <div class="card-body">
-            <h5 id="titel" class="card-title">Card title</h5>
-            <p id="card-text" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        */
-
+    //
+    // THis function is expected to simplify process of building dsynamically data 
+    // sructures.
+    // 
     function addElement(parent, elem, className, id, value) {
         var element = document.createElement(elem);
         if (className !== "")
