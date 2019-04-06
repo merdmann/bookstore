@@ -3,19 +3,19 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM Tree loaded')
 
-    let searchableContents = [];
+    let searchableContents = new Map;
 
     function main() {
         fetchData("https://api.myjson.com/bins/udbm5")
     }
     const btnBookSearch = document.getElementById("btn-book-search");
-    btnBookSearch.addEventListener("click", function () {
-        const searchString = document.getElementById("search-string").value;
+    btnBookSearch.addEventListener("click", 
+        function () {
+            const searchString = document.getElementById("search-string").value;
         
-        searchableContents.Keys.forEach(  function(item) {
-            console.log(item);
-        //    if(item.indexOf(searchString) > 0)
-        //    show("card", searchableContents[])
+            searchableContents.Keys.forEach(  function(item) {
+            if(item.indexOf(searchString) > 0)
+                Show("card", searchableContents[])
         });
     });
     main();
@@ -61,8 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function placeCard(location) {
         const root = document.getElementById(location);
-        console.log("***name: " & location & " " & root);
-
+      
         const div0 = addElement(root, "div", "card", "style", "width: 18rem")
         const div1 = addElement(div0, "div", "flip-card", "", "")
         const div2 = addElement(div1, "div", "flip-card-inner", "", "")
@@ -88,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const moreInfo = elem.detallee;
         const title = elem.titolo;
 
-        let searchableContents[elem.desciption] = elem;
-        console.log(elem)
+        searchableContents[elem.desciption] = elem;
+
 
         placeCard(location);
 
@@ -112,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         books.forEach(function (item) {
             Show("card", item);
-            console.log(item)
         })
     }
 
@@ -130,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json()
             })
             .then(function (myJson) {
-                console.log(myJson);
+                //console.log(myJson);
                 document.body.style.cursor = 'auto'
 
                 ProcessAndRender(myJson)
