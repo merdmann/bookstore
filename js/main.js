@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     btnBookSearch.addEventListener("click", function () {
         const searchString = document.getElementById("search-string").value;
         
-        searchableContents.forEach(  function(item) {
+        searchableContents.Keys.forEach(  function(item) {
             console.log(item);
         //    if(item.indexOf(searchString) > 0)
         //    show("card", searchableContents[])
