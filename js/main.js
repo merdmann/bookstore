@@ -9,22 +9,17 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchData("https://api.myjson.com/bins/udbm5")
     }
     const btnBookSearch = document.getElementById("btn-book-search");
-    btnBookSearch.addEventListener("click", 
-        function () {
-            const searchString = document.getElementById("search-string").value;
-        
-            console.log( searchableContents.Keys() );
-            searchableContents.Keys.forEach(  function(item) {
-                console.log(iem)
-            });
-        });
+    const searchString = document.getElementById("search-string").value;
+    
+    btnBookSearch.addEventListener("click", function() {console.log("click" + searchString)})
+
     main();
 
 
     //
-    // THis function is expected to simplify process of building dsynamically data 
+    // THis function is expected to simplify process of building dsynamically data
     // sructures.
-    // 
+    //
     function addElement(parent, elem, className, id, value) {
         var element = document.createElement(elem);
         if (className !== "")
@@ -44,13 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function placeCard(location) {
         const root = document.getElementById(location);
-      
+
         const div0 = addElement(root, "div", "card", "style", "width: 18rem")
-        const div1 = addElement(div0, "div", "flip-card", "", "")
+        
+        const div1 = addElement(div0, "div", "flip-card", "style", "flex-basis: auto")
         const div2 = addElement(div1, "div", "flip-card-inner", "", "")
         const div3 = addElement(div2, "div", "flip-card-front", "", "")
         const img = addElement(div3, "img", "", "id", uniqId(location, "book-front-cover"))
-        img.setAttribute("style", "width:70%");
+        img.setAttribute("style", "width:80%");
         const div4 = addElement(div3, "div", "flip-card-back", "", "");
         const h1 = addElement(div3, "h1", "", "id", uniqId(location, "book-autor-name"));
         const p = addElement(div3, "p", "", "", "");
@@ -76,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         placeCard(location);
 
         const _book_front_cover_ = document.getElementById(uniqId(location, "book-front-cover"));
-        _book_front_cover_.setAttribute("src", frontCover); // put the image 
+        _book_front_cover_.setAttribute("src", frontCover); // put the image
 
         const _book_autor_name_ = document.getElementById(uniqId(location, "book-autor-name"));
         _book_autor_name_.innerHTML = elem.descripcion;

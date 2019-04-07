@@ -44,5 +44,11 @@ flip-card {
 
 
 .book-shelf {
-    flex:
+  display:flex;
+  flex-wrap: wrap-reverse;
+}
+
+.book {
+   margin: 10 px;    
+
 }
