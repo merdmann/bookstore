@@ -26,13 +26,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // find a key which contains the value and return the objet data
     //
     function search(value){
+        let result = [];
         console.log("search for"+value);
-        searchableContents.forEach( function(item) {
-            if(item.indexOf(value)>0){
-                console.log(item);
-                return searchableContents[item];
-            }
-        })
+
+        let keys = [];
+        for (let key of searchableContents)
+            if( key.indexOf( value ) > 0 )
+                 keys.push(key);
+            console.log(keys);
+        console.log(result);
+        return result;
     }
 
 
