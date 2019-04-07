@@ -3,17 +3,34 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM Tree loaded')
 
-    let searchableContents = new Map;
+    var searchableContents = new Map;
 
     function main() {
         fetchData("https://api.myjson.com/bins/udbm5")
-    }
-    const btnBookSearch = document.getElementById("btn-book-search");
-    const searchString = document.getElementById("search-string").value;
+        
+         console.log("Setting up search");
+         const btnBookSearch = document.getElementById("btn-book-search");
+         const searchString = document.getElementById("search-string");
     
-    btnBookSearch.addEventListener("click", function() {console.log("click" + searchString)})
-
+         searchString.addEventListener("keyup", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            console.log("do search");
+            event.preventDefault();
+            search(searchString.value);
+         })
+    }
+    
     main();
+    
+    function search(value){
+        console.log(value)
+        searchableContents.keys().forEach( function(item) {
+            if(item.indexOf(value)){
+                console.log(item);
+                return searchableContents[item];
+            }
+        })
+    }
 
 
     //
@@ -22,8 +39,15 @@ document.addEventListener('DOMContentLoaded', function () {
     //
     function addElement(parent, elem, className, id, value) {
         var element = document.createElement(elem);
-        if (className !== "")
-            element.classList.add(className);
+        if (className !== "") {
+            var classes = className.split(" ")
+            
+            if( classes.length > 1 ) {
+                classes.forEach( function(item) {
+                    element.classList.add(item) 
+                })
+            }
+        }
 
         if (id !== "")
             element.setAttribute(id, value);
@@ -37,23 +61,24 @@ document.addEventListener('DOMContentLoaded', function () {
         return item + "-" + id;
     }
 
+    // place a card newr the given location 
     function placeCard(location) {
         const root = document.getElementById(location);
 
         const div0 = addElement(root, "div", "card", "style", "width: 18rem")
         
-        const div1 = addElement(div0, "div", "flip-card", "style", "flex-basis: auto")
+        const div1 = addElement(div0, "div", "flip-card book", "style", "flex-basis: auto")
         const div2 = addElement(div1, "div", "flip-card-inner", "", "")
         const div3 = addElement(div2, "div", "flip-card-front", "", "")
         const img = addElement(div3, "img", "", "id", uniqId(location, "book-front-cover"))
         img.setAttribute("style", "width:80%");
-        const div4 = addElement(div3, "div", "flip-card-back", "", "");
-        const h1 = addElement(div3, "h1", "", "id", uniqId(location, "book-autor-name"));
+        const div4 = addElement(div3, "div", "flip-card-back", "");
+        const h1 = addElement(div3, "h3", "", "id", uniqId(location, "book-autor-name"));
         const p = addElement(div3, "p", "", "", "");
         const div5 = addElement(div0, "div", "card-body", "", "");
         const h5 = addElement(div0, "h5", "card-title", "id", uniqId(location, "book-title"));
         const pp = addElement(div0, "p", "card-text", "id", uniqId(location, "card-text"));
-        const a = addElement(div0, "a", "btn", "id", uniqId(location, "more-info"));
+        const a = addElement(div5, "a", "btn", "id", uniqId(location, "more-info"));
         a.classList.add("btn-primary");
         root.appendChild(div0);
 
@@ -66,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const moreInfo = elem.detallee;
         const title = elem.titolo;
 
+        //console.log( elem )
         searchableContents[elem.desciption] = elem;
 
 
