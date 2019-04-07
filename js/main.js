@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
          searchString.addEventListener("keyup", function(event) {
             // Number 13 is the "Enter" key on the keyboard
-            console.log("do search");
+            console.log("do search:"+searchString.value);
             event.preventDefault();
             search(searchString.value);
          })
@@ -22,10 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
     
     main();
     
+    //
+    // find a key which contains the value and return the objet data
+    //
     function search(value){
-        console.log(value)
-        searchableContents.keys().forEach( function(item) {
-            if(item.indexOf(value)){
+        console.log("search for"+value);
+        searchableContents.forEach( function(item) {
+            if(item.indexOf(value)>0){
                 console.log(item);
                 return searchableContents[item];
             }
@@ -40,9 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function addElement(parent, elem, className, id, value) {
         var element = document.createElement(elem);
         if (className !== "") {
-            var classes = className.split(" ")
+            var classes = className.split(" ");
             
-            if( classes.length > 1 ) {
+            if( classes.length > 0 ) {
                 classes.forEach( function(item) {
                     element.classList.add(item) 
                 })
@@ -78,13 +81,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const div5 = addElement(div0, "div", "card-body", "", "");
         const h5 = addElement(div0, "h5", "card-title", "id", uniqId(location, "book-title"));
         const pp = addElement(div0, "p", "card-text", "id", uniqId(location, "card-text"));
-        const a = addElement(div5, "a", "btn", "id", uniqId(location, "more-info"));
+        const a = addElement(div0, "a", "btn", "id", uniqId(location, "more-info"));
         a.classList.add("btn-primary");
         root.appendChild(div0);
 
         return root;
     }
 
+    function SearchKey( elem ) {
+        return elem.descripcion & elem.titulo;
+    }
 
     function Show(location, elem) {
         const frontCover = elem.portada;
@@ -92,8 +98,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const title = elem.titolo;
 
         //console.log( elem )
-        searchableContents[elem.desciption] = elem;
-
+        console.log( "Show:" + elem.titulo );
+        searchableContents.set( SearchKey(elem), elem );
 
         placeCard(location);
 
