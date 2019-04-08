@@ -42,7 +42,7 @@ flip-card {
   transform: rotateY(180deg);
 }
 
-
+//this is the shelf where e plsce all cards
 .book-shelf {
   display:flex;
   flex-wrap: wrap-reverse;

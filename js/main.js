@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //
     function addElement(parent, elem, className, id, value) {
         var element = document.createElement(elem);
+        
         if (className !== "") {
             var classes = className.split(" ");
             
@@ -63,28 +64,32 @@ document.addEventListener('DOMContentLoaded', function () {
         return element;
     }
 
+    // create a unique id for a css object
     function uniqId(item, id) {
         return item + "-" + id;
     }
 
     // place a card newr the given location 
-    function placeCard(location) {
-        const root = document.getElementById(location);
+    function placeCard(locationId) {
+        console.log("placeCard("+locationId+ ")");
+        const root = document.getElementById(locationId);
 
-        const div0 = addElement(root, "div", "card", "style", "width: 18rem")
+        const div0 = addElement(root, "div", "", "id", "card");
+        div0.setAttribute("style", "width: 18rem;");
         
-        const div1 = addElement(div0, "div", "flip-card book", "style", "flex-basis: auto; border:thin")
+        // debuggign css added
+        const div1 = addElement(div0, "div", "flip-card book", "style",  "border: 1px solid red;")
         const div2 = addElement(div1, "div", "flip-card-inner", "", "")
         const div3 = addElement(div2, "div", "flip-card-front", "", "")
-        const img = addElement(div3, "img", "", "id", uniqId(location, "book-front-cover"))
+        const img = addElement(div3, "img", "", "id", uniqId(locationId, "book-front-cover"))
         img.setAttribute("style", "width:80%");
         const div4 = addElement(div3, "div", "flip-card-back", "");
         const h1 = addElement(div3, "h3", "", "id", uniqId(location, "book-autor-name"));
         const p = addElement(div3, "p", "", "", "");
         const div5 = addElement(div0, "div", "card-body", "", "");
-        const h5 = addElement(div0, "h5", "card-title", "id", uniqId(location, "book-title"));
-        const pp = addElement(div0, "p", "card-text", "id", uniqId(location, "card-text"));
-        const a = addElement(div0, "a", "btn", "id", uniqId(location, "more-info"));
+        const h5 = addElement(div0, "h5", "card-title", "id", uniqId(locationId, "book-title"));
+        const pp = addElement(div0, "p", "card-text", "id", uniqId(locationId, "card-text"));
+        const a = addElement(div0, "a", "btn", "id", uniqId(locationId, "more-info"));
         a.classList.add("btn-primary");
         root.appendChild(div0);
 
