@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const div0 = addElement(root, "div", "card", "style", "width: 18rem")
         
-        const div1 = addElement(div0, "div", "flip-card book", "style", "flex-basis: auto")
+        const div1 = addElement(div0, "div", "flip-card book", "style", "flex-basis: auto; border:thin")
         const div2 = addElement(div1, "div", "flip-card-inner", "", "")
         const div3 = addElement(div2, "div", "flip-card-front", "", "")
         const img = addElement(div3, "img", "", "id", uniqId(location, "book-front-cover"))
