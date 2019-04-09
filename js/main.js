@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Number 13 is the "Enter" key on the keyboard
             console.log("do search:" + searchString.value);
             event.preventDefault();
-            search(searchString.value);
+            const result = search(searchString.value);
+            result.forEach( function(book){ Show('card', book)})
         })
     }
 
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //
     // find a key which contains the value and return the objet data
+    // lets hope that map handles laege keys better then i could
     //
     function search(value) {
         let result = [];
@@ -32,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
         searchableContents.forEach( function(item, book) {
             const key = Array.from(SearchKey(item));
-            console.log(book);
             
             if( key.indexOf(value)>0)
                 result.push(book)
