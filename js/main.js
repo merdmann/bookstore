@@ -7,33 +7,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function main() {
         fetchData("https://api.myjson.com/bins/udbm5")
-        
-         console.log("Setting up search");
-         const btnBookSearch = document.getElementById("btn-book-search");
-         const searchString = document.getElementById("search-string");
-    
-         searchString.addEventListener("keyup", function(event) {
+
+        console.log("Setting up search");
+        const btnBookSearch = document.getElementById("btn-book-search");
+        const searchString = document.getElementById("search-string");
+
+        searchString.addEventListener("keyup", function (event) {
             // Number 13 is the "Enter" key on the keyboard
-            console.log("do search:"+searchString.value);
+            console.log("do search:" + searchString.value);
             event.preventDefault();
             search(searchString.value);
-         })
+        })
     }
-    
+
     main();
-    
+
     //
     // find a key which contains the value and return the objet data
     //
-    function search(value){
+    function search(value) {
         let result = [];
-        console.log("search for"+value);
-
-        let keys = [];
-        for (let key of searchableContents)
-            if( key.indexOf( value ) > 0 )
-                 keys.push(key);
-            console.log(keys);
+        
+        console.log("search for " + value);
+    
+        searchableContents.forEach( function(item, book) {
+            const key = Array.from(SearchKey(item));
+            console.log(book);
+            
+            if( key.indexOf(value)>0)
+                result.push(book)
+        }); 
+             
         console.log(result);
         return result;
     }
@@ -45,13 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
     //
     function addElement(parent, elem, className, id, value) {
         var element = document.createElement(elem);
-        
+
         if (className !== "") {
             var classes = className.split(" ");
-            
-            if( classes.length > 0 ) {
-                classes.forEach( function(item) {
-                    element.classList.add(item) 
+
+            if (classes.length > 0) {
+                classes.forEach(function (item) {
+                    element.classList.add(item)
                 })
             }
         }
@@ -69,22 +73,22 @@ document.addEventListener('DOMContentLoaded', function () {
         return item + "-" + id;
     }
 
-    // place a card newr the given location 
+    // place a card newr the given location
     function placeCard(locationId) {
-        console.log("placeCard("+locationId+ ")");
+        console.log("placeCard(" + locationId + ")");
         const root = document.getElementById(locationId);
 
         const div0 = addElement(root, "div", "", "id", "card");
         div0.setAttribute("style", "width: 18rem;");
-        
+
         // debuggign css added
-        const div1 = addElement(div0, "div", "flip-card book", "style",  "border: 1px solid red;")
+        const div1 = addElement(div0, "div", "flip-card book", "style", "border: 1px solid red;")
         const div2 = addElement(div1, "div", "flip-card-inner", "", "")
         const div3 = addElement(div2, "div", "flip-card-front", "", "")
         const img = addElement(div3, "img", "", "id", uniqId(locationId, "book-front-cover"))
         img.setAttribute("style", "width:80%");
         const div4 = addElement(div3, "div", "flip-card-back", "");
-        const h1 = addElement(div3, "h3", "", "id", uniqId(location, "book-autor-name"));
+        const h1 = addElement(div3, "h3", "", "id", uniqId(locationId, "book-autor-name"));
         const p = addElement(div3, "p", "", "", "");
         const div5 = addElement(div0, "div", "card-body", "", "");
         const h5 = addElement(div0, "h5", "card-title", "id", uniqId(locationId, "book-title"));
@@ -96,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return root;
     }
 
-    function SearchKey( elem ) {
+    function SearchKey(elem) {
         return elem.descripcion & elem.titulo;
     }
 
@@ -106,16 +110,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const title = elem.titolo;
 
         //console.log( elem )
-        console.log( "Show:" + elem.titulo );
-        searchableContents.set( SearchKey(elem), elem );
+        console.log("Show:" + elem.titulo);
+        searchableContents.set(SearchKey(elem), elem);
 
         placeCard(location);
 
         const _book_front_cover_ = document.getElementById(uniqId(location, "book-front-cover"));
         _book_front_cover_.setAttribute("src", frontCover); // put the image
 
-        const _book_autor_name_ = document.getElementById(uniqId(location, "book-autor-name"));
-        _book_autor_name_.innerHTML = elem.descripcion;
+        //const _book_autor_name_ = document.getElementById(uniqId(location, "book-autor-name"));
+        //_book_autor_name_.innerHTML = elem.descripcion;
         const _book_title_ = document.getElementById(uniqId(location, "book-title"));
         _book_title_.innerHTML = elem.titulo;
         const _more_info_ = document.getElementById(uniqId(location, "more-info"));
