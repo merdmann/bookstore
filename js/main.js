@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("do search:" + searchString.value);
             event.preventDefault();
             const result = search(searchString.value);
-            result.forEach( function(book){ Show('card', book)})
+            result.forEach(function (book) {
+                Show('card', book)
+            })
         })
     }
 
@@ -29,16 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
     //
     function search(value) {
         let result = [];
-        
+
         console.log("search for " + value);
-    
-        searchableContents.forEach( function(item, book) {
+
+        searchableContents.forEach(function (item, book) {
             const key = Array.from(SearchKey(item));
-            
-            if( key.indexOf(value)>0)
+
+            if (key.indexOf(value) > 0)
                 result.push(book)
-        }); 
-             
+        });
+
         console.log(result);
         return result;
     }
