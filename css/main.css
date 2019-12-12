@@ -59,9 +59,12 @@ flip-card {
 
 .book-shelf {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     flex-wrap: wrap-reverse;
 }
+
+
+/* an indivual book */
 
 .book {
     margin: 10 px;

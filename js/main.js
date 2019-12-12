@@ -46,17 +46,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
 
-
-        // create a unique id for a css object
-        function uniqId(item, id) {
-            return item + "-" + id;
+        // flip the page with the given titel
+        function flipCard(o) {
+            console.log("Flipping" + o.titulo);
+            //const _elem_ = document.getElementById(o.titulo)
+            //_elem_.className = "flip-card";
         }
 
         // place a card newr the given location
         function placeCard(locationId, elem) {
             const root = document.getElementById(locationId);
-            const tile = `<div class="card text-center" style="width: 100px">
-                <img class="card-img-top imgs" src="${elem.portada}" alt=" cover ${elem.titulo} not availale">
+            const tile = `<div class="card text-center" style="width: 100px;"  id="${elem.titulo}" >
+                <img class="card-img-top book" src="${elem.portada}" alt=" cover ${elem.titulo} not availale">
                 <div class="card-img-overlay text-right text-light">
                 <h4 class="card-title">${elem.titulo}</div>
                 <p class="card-text">${elem.titulo}</p>
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const books = data["books"]
 
             books.forEach(function(item) {
-                Show("card", item);
+                Show("shelf", item);
             })
         }
 
