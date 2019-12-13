@@ -48,25 +48,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // flip the page with the given titel
         function flipCard(o) {
-            console.log("Flipping" + o.titulo);
-            //const _elem_ = document.getElementById(o.titulo)
-            //_elem_.className = "flip-card";
+            console.log("Flipping " + o);
+            const _elem_ = document.getElementById(o)
+            _elem_.className = "flip-card";
         }
 
         // place a card newr the given location
         function placeCard(locationId, elem) {
             const root = document.getElementById(locationId);
-            const tile = `<div class="card text-center" style="width: 100px;"  id="${elem.titulo}" >
-                <img class="card-img-top book" src="${elem.portada}" alt=" cover ${elem.titulo} not availale">
+            const title = elem.titulo;
+            const tile =
+                `<div class="card text-center" style="width: 100px;"  id="${elem.titulo}" >
+                <img class="card-img-top book" src="${elem.portada}" id="${title}" alt=" cover ${title} not availale">
                 <div class="card-img-overlay text-right text-light">
                 <h4 class="card-title">${elem.titulo}</div>
                 <p class="card-text">${elem.titulo}</p>
                 </div>
-                <div class="card-body">
-                   ${elem.titulo}
+                <div class="card-body" style="width: 100px">
                 </div>
                 </div>`
             root.innerHTML += tile;
+            const img = document.getElementById(title);
+            img.addEventListener("click", function() {
+                flipCard(this.id)
+            })
         }
 
         function SearchKey(elem) {
@@ -85,6 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
             placeCard(location, elem);
         };
 
+        /**
+         * This function id beeing cslled when all the data has been received.
+         * @param {*} data 
+         */
         function ProcessAndRender(data) {
             const books = data["books"]
 
@@ -93,22 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }
 
-        // Needs to be refctored since it hides intention bhind a boolean,
+        /**
+         * this function is called to retrive the API data from the service provider.
+         * @param {*} url 
+         */
         function fetchData(url) {
-            fetch(url, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                            /* "X-API-Key": "wqmgqOHo1JMAkYIfh3sJr4FlUN3PCokyojEziJBK" */
-                    }
-                    /* mode: "cors" */
-                })
-                .then(function(response) {
-                    document.body.style.cursor = 'wait'
+            const opts = { 'Content-Type': 'application/json' };
+
+            fetch(url, opts).then(function(response) {
                     return response.json()
                 })
                 .then(function(myJson) {
                     //console.log(myJson);
-                    document.body.style.cursor = 'auto'
 
                     ProcessAndRender(myJson)
                 })
