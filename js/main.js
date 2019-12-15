@@ -3,48 +3,27 @@
 document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM Tree loaded')
 
-        var searchableContents = new Map;
+        var filter = "Java";
 
+        /**
+         * Main Handler of App
+         */
         function main() {
             fetchData("https://api.myjson.com/bins/udbm5")
 
-            console.log("Setting up search");
-            const btnBookSearch = document.getElementById("btn-book-search");
-            const searchString = document.getElementById("search-string");
+            const _btnBookSearch_ = document.getElementById("btn-book-search");
+            const _searchString_ = document.getElementById("search-string");
 
-            searchString.addEventListener("keyup", function(event) {
-                // Number 13 is the "Enter" key on the keyboard
-                console.log("do search:" + searchString.value);
-                event.preventDefault();
-                const result = search(searchString.value);
-                result.forEach(function(book) {
-                    Show('card', book)
-                })
+            _searchString_.value = filter;
+
+            _btnBookSearch_.addEventListener("click", function(event) {
+                console.log("Search click");
+                filter = _searchString_.value;
+                // reread all data and filter it. 
+                fetchData("https://api.myjson.com/bins/udbm5")
             })
         }
-
         main();
-
-        //
-        // find a key which contains the value and return the objet data
-        // lets hope that map handles laege keys better then i could
-        //
-        function search(value) {
-            let result = [];
-
-            console.log("search for " + value);
-
-            searchableContents.forEach(function(item, book) {
-                const key = Array.from(SearchKey(item));
-
-                if (key.indexOf(value) > 0)
-                    result.push(book)
-            });
-
-            console.log(result);
-            return result;
-        }
-
 
         // flip the page with the given titel
         function flipCard(o) {
@@ -74,37 +53,24 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }
 
-        function SearchKey(elem) {
-            return elem.descripcion & elem.titulo;
-        }
-
-        function Show(location, elem) {
-            const frontCover = elem.portada;
-            const moreInfo = elem.detallee;
-            const title = elem.titolo;
-
-            console.log(elem)
-            console.log("Show:" + elem.titulo);
-            searchableContents.set(SearchKey(elem), elem);
-
-            placeCard(location, elem);
-        };
-
         /**
-         * This function id beeing cslled when all the data has been received.
-         * @param {*} data 
+         * This function id beeing called when all the data has been received.
+         * @param {*} data
          */
         function ProcessAndRender(data) {
             const books = data["books"]
 
             books.forEach(function(item) {
-                Show("shelf", item);
+                console.log("filter=" + filter)
+                if (item.titulo.includes(filter) == true) {
+                    placeCard("shelf", item);
+                }
             })
         }
 
         /**
          * this function is called to retrive the API data from the service provider.
-         * @param {*} url 
+         * @param {*} url
          */
         function fetchData(url) {
             const opts = { 'Content-Type': 'application/json' };
