@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM Tree loaded')
 
-        var filter = "Java";
+        var filter = "";
 
         /**
          * Main Handler of App
@@ -17,40 +17,28 @@ document.addEventListener('DOMContentLoaded', function() {
             _searchString_.value = filter;
 
             _btnBookSearch_.addEventListener("click", function(event) {
+                const root = document.getElementById("shelf");
+                root.innerHTML = "";
+
                 console.log("Search click");
+
                 filter = _searchString_.value;
                 // reread all data and filter it. 
-                fetchData("https://api.myjson.com/bins/udbm5")
+                fetchData("https://api.myjson.com/bins/udbm5");
             })
         }
         main();
 
-        // flip the page with the given titel
-        function flipCard(o) {
-            console.log("Flipping " + o);
-            const _elem_ = document.getElementById(o)
-            _elem_.className = "flip-card";
-        }
-
-        // place a card newr the given location
+        // place a card at the given location
         function placeCard(locationId, elem) {
             const root = document.getElementById(locationId);
             const title = elem.titulo;
             const tile =
-                `<div class="card text-center" style="width: 100px;"  id="${elem.titulo}" >
-                <img class="card-img-top book" src="${elem.portada}" id="${title}" alt=" cover ${title} not availale">
-                <div class="card-img-overlay text-right text-light">
-                <h4 class="card-title">${elem.titulo}</div>
-                <p class="card-text">${elem.titulo}</p>
-                </div>
-                <div class="card-body" style="width: 100px">
+                `<div class="card flip-card-inner" style="width: 100px; height: 200px; "   id="${elem.titulo}" >
+                <img class="card-img-top book flip-card-front flip-card" src="${elem.portada}" id="${title}" alt=" cover ${title} not availale">
                 </div>
                 </div>`
             root.innerHTML += tile;
-            const img = document.getElementById(title);
-            img.addEventListener("click", function() {
-                flipCard(this.id)
-            })
         }
 
         /**
