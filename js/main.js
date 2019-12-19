@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const root = document.getElementById(locationId);
             const title = elem.titulo;
             const tile =
-                `<div class="card flip-card-inner" style="width: 100px; height: 200px; "   id="${elem.titulo}" >
-                <img class="card-img-top book flip-card-front flip-card" src="${elem.portada}" id="${title}" alt=" cover ${title} not availale">
-                </div>
+                `<div class="card flip-card-inner" style="width: 100px; height: 200px; " id="${elem.titulo}" >
+                 <img class="card-img-top book flip-card-front flip-card" src="${elem.portada}" id="${title}" alt=" cover ${title} not availale">
+                 </div>
                 </div>`
             root.innerHTML += tile;
         }

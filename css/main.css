@@ -13,14 +13,9 @@ flip-card {
 .flip-card-inner {
     position: relative;
     width: 100%;
-    /*   height: 100%; */
-    text-align: center;
+    height: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 
@@ -77,10 +72,12 @@ flip-card {
 /* an indivual book */
 
 .book {
-    margin: 20 px;
-    width: 150px;
-    padding-left: 20 px;
-    padding-right: 20 px;
-    padding-top: 20px;
-    scroll-padding-bottom: 20px;
+    width: 100%;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 10px;
+    margin-top: 10 px;
+    margin-bottom: 10px;
+    margin-right: 10 px;
 }
