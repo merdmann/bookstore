@@ -1,0 +1,26 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "Bookstore demo",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^3.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "my-server -p 3030",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:3030 cy:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merdmann/bookstore.git"
+  },
+  "author": "Michael Erdmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/merdmann/bookstore/issues"
+  },
+  "homepage": "https://github.com/merdmann/bookstore#readme"
+}
