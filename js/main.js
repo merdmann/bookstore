@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         <div class="flip-card-back">
                             <p>${elem.titulo}</p>
+                            <p>${elem.descripcion}</p>
                         </div>
                     </div>
                 </div>`
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
          */
         function ProcessAndRender(data) {
             const books = data["books"]
+            console.log(books)
 
             books.forEach(function(item) {
                 console.log("filter=" + filter)
