@@ -1,3 +1,19 @@
+##Overview
+
+This is a single page application
+
+##Netlify
+
+THe Bookstore browser is avilavble on Netlify.
+
+https://relaxed-einstein-f83244.netlify.com
+
+
+##Testing
+
+THe automatic testin is done by means of cypress.
+
+
 #introduction
 THis is a training example as follows:
 
