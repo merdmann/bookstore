@@ -1,6 +1,6 @@
 ##Overview
 
-This is a single page application
+The datasource behind this broken. Opening the link should yield some error message. 
 
 ##Netlify
 
