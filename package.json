@@ -8,10 +8,9 @@
     "cypress": "^3.8.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "start-server-and-test start http://localhost:3030 cy:run",
     "start": "my-server -p 3030",
-    "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:3030 cy:run"
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",

@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img class="book" src="${elem.portada}" id="${title}" alt=" cover ${title} not availale">
                         </div>
                         <div class="flip-card-back">
-                            <p>${elem.titulo}</p>
+                            <h2>${elem.titulo}</h2>
                             <p>${elem.descripcion}</p>
                         </div>
                     </div>
@@ -70,7 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
          * @param {*} url
          */
         function fetchData(url) {
-            const opts = { 'Content-Type': 'application/json' };
+
+            const opts = {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            };
 
             fetch(url, opts).then(function(response) {
                     return response.json()
