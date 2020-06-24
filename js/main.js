@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     ProcessAndRender(myJson)
                 })
-                .catch(err => console.log(err))
+                .catch(err => window.alert(err + ' from url ' + url))
         }
 
     }) // DOMContentLoaded handler
