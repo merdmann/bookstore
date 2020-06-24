@@ -4,7 +4,7 @@ The datasource behind this broken. Opening the link should yield some error mess
 
 ##Netlify
 
-THe Bookstore browser is avilavble on Netlify.
+The Bookstore browser is avilavble on Netlify.
 
 https://relaxed-einstein-f83244.netlify.com
 
@@ -15,7 +15,7 @@ THe automatic testin is done by means of cypress.
 
 
 #introduction
-THis is a training example as follows:
+This is a training example as follows:
 
 #Scope
 A regular customer has requested a provisional version for one of his latest projects: a bookstore.
